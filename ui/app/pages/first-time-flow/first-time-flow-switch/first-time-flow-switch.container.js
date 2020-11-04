@@ -6,14 +6,16 @@ const mapStateToProps = ({ metamask }) => {
     completedOnboarding,
     isInitialized,
     isUnlocked,
-    participateInMetaMetrics: optInMetaMetrics,
+    firstTimeFlowType,
+    participateInMetaMetrics,
   } = metamask
 
   return {
     completedOnboarding,
     isInitialized,
     isUnlocked,
-    optInMetaMetrics,
+    firstTimeFlowType,
+    participateInMetaMetrics,
   }
 }
 

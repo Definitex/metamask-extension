@@ -28,6 +28,7 @@ export default class SeedPhrase extends PureComponent {
     const { seedPhrase, history, verifySeedPhrase } = this.props
 
     if (!seedPhrase) {
+      // when is this case hit!?
       verifySeedPhrase().then((verifiedSeedPhrase) => {
         if (verifiedSeedPhrase) {
           this.setState({ verifiedSeedPhrase })

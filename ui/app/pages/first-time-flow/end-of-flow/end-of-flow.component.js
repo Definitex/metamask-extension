@@ -15,6 +15,7 @@ export default class EndOfFlowScreen extends PureComponent {
   static propTypes = {
     history: PropTypes.object,
     completionMetaMetricsName: PropTypes.string,
+    setCompletedOnboarding: PropTypes.function,
     onboardingInitiator: PropTypes.exact({
       location: PropTypes.string,
       tabId: PropTypes.number,
@@ -24,10 +25,12 @@ export default class EndOfFlowScreen extends PureComponent {
   onComplete = async () => {
     const {
       history,
+      setCompletedOnboarding,
       completionMetaMetricsName,
       onboardingInitiator,
     } = this.props
 
+    await setCompletedOnboarding()
     this.context.metricsEvent({
       eventOpts: {
         category: 'Onboarding',

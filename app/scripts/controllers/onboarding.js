@@ -3,13 +3,13 @@ import log from 'loglevel'
 
 /**
  * @typedef {Object} InitState
- * @property {Boolean} seedPhraseBackedUp Indicates whether the user has completed the seed phrase backup challenge
+ * @property {Boolean} seedPhraseBackedUp - Indicates whether the user has completed the seed phrase backup challenge
  */
 
 /**
  * @typedef {Object} OnboardingOptions
- * @property {InitState} initState The initial controller state
- * @property {PreferencesController} preferencesController Controller for managing user perferences
+ * @property {InitState} initState - The initial controller state
+ * @property {PreferencesController} preferencesController - Controller for managing user perferences
  */
 
 /**
@@ -20,14 +20,14 @@ export default class OnboardingController {
   /**
    * Creates a new controller instance
    *
-   * @param {OnboardingOptions} [opts] Controller configuration parameters
+   * @param {OnboardingOptions} [opts] - Controller configuration parameters
    */
   constructor(opts = {}) {
     const initialTransientState = {
       onboardingTabs: {},
     }
     const initState = {
-      seedPhraseBackedUp: true,
+      seedPhraseBackedUp: false,
       ...opts.initState,
       ...initialTransientState,
     }
