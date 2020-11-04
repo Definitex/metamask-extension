@@ -100,7 +100,7 @@ export async function getMethodDataAsync(fourBytePrefix) {
  * Returns four-byte method signature from data
  *
  * @param {string} data - The hex data (@code txParams.data) of a transaction
- * @returns {string} - The four-byte method signature
+ * @returns {string} The four-byte method signature
  */
 export function getFourBytePrefix(data = '') {
   const prefixedData = ethUtil.addHexPrefix(data)
@@ -112,7 +112,7 @@ export function getFourBytePrefix(data = '') {
  * Given an transaction category, returns a boolean which indicates whether the transaction is calling an erc20 token method
  *
  * @param {string} transactionCategory - The category of transaction being evaluated
- * @returns {boolean} - whether the transaction is calling an erc20 token method
+ * @returns {boolean} whether the transaction is calling an erc20 token method
  */
 export function isTokenMethodAction(transactionCategory) {
   return [

@@ -76,8 +76,8 @@ export default class DecryptMessageManager extends EventEmitter {
    * the new DecryptMessage to this.messages, and to save the unapproved DecryptMessages from that list to
    * this.memStore.
    *
-   * @param {Object} msgParams The params for the eth_decrypt call to be made after the message is approved.
-   * @param {Object} req (optional) The original request object possibly containing the origin
+   * @param {Object} msgParams - The params for the eth_decrypt call to be made after the message is approved.
+   * @param {Object} [req] - The original request object possibly containing the origin
    * @returns {Promise<Buffer>} The raw decrypted message contents
    *
    */
@@ -121,8 +121,8 @@ export default class DecryptMessageManager extends EventEmitter {
    * the new DecryptMessage to this.messages, and to save the unapproved DecryptMessages from that list to
    * this.memStore.
    *
-   * @param {Object} msgParams The params for the eth_decryptMsg call to be made after the message is approved.
-   * @param {Object} req (optional) The original request object possibly containing the origin
+   * @param {Object} msgParams - The params for the eth_decryptMsg call to be made after the message is approved.
+   * @param {Object} [req] - The original request object possibly containing the origin
    * @returns {number} The id of the newly created DecryptMessage.
    *
    */
@@ -289,7 +289,7 @@ export default class DecryptMessageManager extends EventEmitter {
    * unapprovedDecryptMsgs index to storage via this._saveMsgList
    *
    * @private
-   * @param {msg} DecryptMessage A DecryptMessage that will replace an existing DecryptMessage (with the same
+   * @param {DecryptMessage} msg - A DecryptMessage that will replace an existing DecryptMessage (with the same
    * id) in this.messages
    *
    */

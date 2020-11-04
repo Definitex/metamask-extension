@@ -301,7 +301,7 @@ export function exportAsFile(filename, data, type = 'text/csv') {
  * Safely checksumms a potentially-null address
  *
  * @param {string} [address] - address to checksum
- * @returns {string} - checksummed address
+ * @returns {string} checksummed address
  *
  */
 export function checksumAddress(address) {
@@ -379,7 +379,7 @@ export function isExtensionUrl(urlLike) {
  * lowercased version of the addresses.
  *
  * @param {string} address - The hex address to check
- * @param {array} list - The array of objects to check
+ * @param {Array} list - The array of objects to check
  * @returns {boolean} Whether or not the address is in the list
  */
 export function checkExistingAddresses(address, list = []) {

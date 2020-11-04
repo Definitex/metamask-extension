@@ -11,9 +11,9 @@ import EthQuery from 'ethjs-query'
 <br>
 @param {Object} config - non optional configuration object consists of:
     @param {Object} config.provider - A network provider.
-    @param {Object} config.nonceTracker see nonce tracker
-    @param {function} config.getPendingTransactions a function for getting an array of transactions,
-    @param {function} config.publishTransaction a async function for publishing raw transactions,
+    @param {Object} config.nonceTracker - see nonce tracker
+    @param {Function} config.getPendingTransactions - a function for getting an array of transactions,
+    @param {Function} config.publishTransaction - a async function for publishing raw transactions,
 
 @class
 */

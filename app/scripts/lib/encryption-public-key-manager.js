@@ -73,8 +73,8 @@ export default class EncryptionPublicKeyManager extends EventEmitter {
    * the new EncryptionPublicKey to this.messages, and to save the unapproved EncryptionPublicKeys from that list to
    * this.memStore.
    *
-   * @param {Object} address The param for the eth_getEncryptionPublicKey call to be made after the message is approved.
-   * @param {Object} req (optional) The original request object possibly containing the origin
+   * @param {Object} address - The param for the eth_getEncryptionPublicKey call to be made after the message is approved.
+   * @param {Object} [req] - The original request object possibly containing the origin
    * @returns {Promise<Buffer>} The raw public key contents
    *
    */
@@ -115,8 +115,8 @@ export default class EncryptionPublicKeyManager extends EventEmitter {
    * the new EncryptionPublicKey to this.messages, and to save the unapproved EncryptionPublicKeys from that list to
    * this.memStore.
    *
-   * @param {Object} address The param for the eth_getEncryptionPublicKey call to be made after the message is approved.
-   * @param {Object} _req (optional) The original request object possibly containing the origin
+   * @param {Object} address - The param for the eth_getEncryptionPublicKey call to be made after the message is approved.
+   * @param {Object} [req] - The original request object possibly containing the origin
    * @returns {number} The id of the newly created EncryptionPublicKey.
    *
    */
@@ -275,7 +275,7 @@ export default class EncryptionPublicKeyManager extends EventEmitter {
    * unapprovedEncryptionPublicKeyMsgs index to storage via this._saveMsgList
    *
    * @private
-   * @param {msg} EncryptionPublicKey A EncryptionPublicKey that will replace an existing EncryptionPublicKey (with the same
+   * @param {EncryptionPublicKey} msg - A EncryptionPublicKey that will replace an existing EncryptionPublicKey (with the same
    * id) in this.messages
    *
    */

@@ -25,10 +25,10 @@ import { getFinalStates, normalizeTxParams } from './lib/util'
   <br>   - `'failed'` the tx failed for some reason, included on tx data.
   <br>   - `'dropped'` the tx nonce was already used
   @param {Object} opts
-  @param {Object} [opts.initState={ transactions: [] }] initial transactions list with the key transaction {array}
-  @param {number} [opts.txHistoryLimit] limit for how many finished
+  @param {Object} [opts.initState={ transactions: [] }] - initial transactions list with the key transaction {array}
+  @param {number} [opts.txHistoryLimit] - limit for how many finished
   transactions can hang around in state
-  @param {function} opts.getNetwork return network number
+  @param {Function} opts.getNetwork - return network number
   @class
 */
 export default class TransactionStateManager extends EventEmitter {
@@ -42,7 +42,7 @@ export default class TransactionStateManager extends EventEmitter {
 
   /**
     @param {Object} opts - the object to use when overwriting defaults
-    @returns {txMeta} - the default txMeta object
+    @returns {txMeta} the default txMeta object
   */
   generateTxMeta(opts) {
     const netId = this.getNetwork()
@@ -64,7 +64,7 @@ export default class TransactionStateManager extends EventEmitter {
    *
    * The list is iterated backwards as new transactions are pushed onto it.
    *
-   * @param {number} [limit] a limit for the number of transactions to return
+   * @param {number} [limit] - a limit for the number of transactions to return
    * @returns {Object[]} The {@code txMeta}s, filtered to the current network
    */
   getTxList(limit) {
@@ -96,14 +96,14 @@ export default class TransactionStateManager extends EventEmitter {
   }
 
   /**
-    @returns {array} - of all the txMetas in store
+    @returns {array} of all the txMetas in store
   */
   getFullTxList() {
     return this.store.getState().transactions
   }
 
   /**
-    @returns {array} - the tx list whose status is unapproved
+    @returns {array} the tx list whose status is unapproved
   */
   getUnapprovedTxList() {
     const txList = this.getTxsByMetaData('status', 'unapproved')
@@ -114,8 +114,8 @@ export default class TransactionStateManager extends EventEmitter {
   }
 
   /**
-    @param [address] {string} - hex prefixed address to sort the txMetas for [optional]
-    @returns {array} - the tx list whose status is approved if no address is provide
+    @param {string} [address] - hex prefixed address to sort the txMetas for [optional]
+    @returns {array} the tx list whose status is approved if no address is provide
     returns all txMetas who's status is approved for the current network
   */
   getApprovedTransactions(address) {
@@ -127,8 +127,8 @@ export default class TransactionStateManager extends EventEmitter {
   }
 
   /**
-    @param [address] {string} - hex prefixed address to sort the txMetas for [optional]
-    @returns {array} - the tx list whose status is submitted if no address is provide
+    @param {string} [address] - hex prefixed address to sort the txMetas for [optional]
+    @returns {array} the tx list whose status is submitted if no address is provide
     returns all txMetas who's status is submitted for the current network
   */
   getPendingTransactions(address) {
@@ -140,8 +140,8 @@ export default class TransactionStateManager extends EventEmitter {
   }
 
   /**
-    @param [address] {string} - hex prefixed address to sort the txMetas for [optional]
-    @returns {array} - the tx list whose status is confirmed if no address is provide
+    @param {string} [address] - hex prefixed address to sort the txMetas for [optional]
+    @returns {array} the tx list whose status is confirmed if no address is provide
     returns all txMetas who's status is confirmed for the current network
   */
   getConfirmedTransactions(address) {
@@ -159,7 +159,7 @@ export default class TransactionStateManager extends EventEmitter {
     it will also add the key `history` to the txMeta with the snap shot of the original
     object
     @param {Object} txMeta
-    @returns {Object} - the txMeta
+    @returns {Object} the txMeta
   */
   addTx(txMeta) {
     // normalize and validate txParams if present
@@ -209,7 +209,7 @@ export default class TransactionStateManager extends EventEmitter {
 
   /**
     @param {number} txId
-    @returns {Object} - the txMeta who matches the given id if none found
+    @returns {Object} the txMeta who matches the given id if none found
     for the network returns undefined
   */
   getTx(txId) {
@@ -309,8 +309,8 @@ export default class TransactionStateManager extends EventEmitter {
   }<br></code>
   optionally the values of the keys can be functions for situations like where
   you want all but one status.
-  @param [initialList=this.getTxList()]
-  @returns {array} - array of txMeta with all
+  @param {Array} [initialList=this.getTxList()]
+  @returns {array} array of txMeta with all
   options matching
   */
   /*
@@ -339,9 +339,9 @@ export default class TransactionStateManager extends EventEmitter {
 
     @param {string} key - the key to check
     @param value - the value your looking for can also be a function that returns a bool
-    @param [txList=this.getTxList()] {array} - the list to search. default is the txList
+    @param {Array} [txList=this.getTxList()] - the list to search. default is the txList
     from txStateManager#getTxList
-    @returns {array} - a list of txMetas who matches the search params
+    @returns {array} a list of txMetas who matches the search params
   */
   getTxsByMetaData(key, value, txList = this.getTxList()) {
     const filter = typeof value === 'function' ? value : (v) => v === value
@@ -358,7 +358,7 @@ export default class TransactionStateManager extends EventEmitter {
 
   /**
     @param {number} txId - the txMeta Id
-    @returns {string} - the status of the tx.
+    @returns {string} the status of the tx.
   */
   getTxStatus(txId) {
     const txMeta = this.getTx(txId)
@@ -512,7 +512,7 @@ export default class TransactionStateManager extends EventEmitter {
 
   /**
     Saves the new/updated txList.
-    @param {array} transactions - the list of transactions to save
+    @param {Array} transactions - the list of transactions to save
   */
   // Function is intended only for internal use
   _saveTxList(transactions) {

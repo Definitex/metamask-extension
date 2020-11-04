@@ -32,7 +32,6 @@ export default class PersonalMessageManager extends EventEmitter {
    * Controller in charge of managing - storing, adding, removing, updating - PersonalMessage.
    *
    * @typedef {Object} PersonalMessageManager
-   * @param {Object} opts @deprecated
    * @property {Object} memStore The observable store where PersonalMessage are saved.
    * @property {Object} memStore.unapprovedPersonalMsgs A collection of all PersonalMessages in the 'unapproved' state
    * @property {number} memStore.unapprovedPersonalMsgCount The count of all PersonalMessages in this.memStore.unapprobedMsgs
@@ -51,7 +50,7 @@ export default class PersonalMessageManager extends EventEmitter {
   /**
    * A getter for the number of 'unapproved' PersonalMessages in this.messages
    *
-   * @returns {number} - The number of 'unapproved' PersonalMessages in this.messages
+   * @returns {number} The number of 'unapproved' PersonalMessages in this.messages
    *
    */
   get unapprovedPersonalMsgCount() {
@@ -61,7 +60,7 @@ export default class PersonalMessageManager extends EventEmitter {
   /**
    * A getter for the 'unapproved' PersonalMessages in this.messages
    *
-   * @returns {Object} - An index of PersonalMessage ids to PersonalMessages, for all 'unapproved' PersonalMessages in
+   * @returns {Object} An index of PersonalMessage ids to PersonalMessages, for all 'unapproved' PersonalMessages in
    * this.messages
    *
    */
@@ -80,8 +79,8 @@ export default class PersonalMessageManager extends EventEmitter {
    * this.memStore.
    *
    * @param {Object} msgParams - The params for the eth_sign call to be made after the message is approved.
-   * @param {Object} req (optional) The original request object possibly containing the origin
-   * @returns {promise} - When the message has been signed or rejected
+   * @param {Object} [req] - The original request object possibly containing the origin
+   * @returns {promise} When the message has been signed or rejected
    *
    */
   addUnapprovedMessageAsync(msgParams, req) {
@@ -122,8 +121,8 @@ export default class PersonalMessageManager extends EventEmitter {
    * this.memStore.
    *
    * @param {Object} msgParams - The params for the eth_sign call to be made after the message is approved.
-   * @param {Object} req (optional) The original request object possibly containing the origin
-   * @returns {number} - The id of the newly created PersonalMessage.
+   * @param {Object} [req] - The original request object possibly containing the origin
+   * @returns {number} The id of the newly created PersonalMessage.
    *
    */
   addUnapprovedMessage(msgParams, req) {
@@ -170,7 +169,7 @@ export default class PersonalMessageManager extends EventEmitter {
    * Returns a specified PersonalMessage.
    *
    * @param {number} msgId - The id of the PersonalMessage to get
-   * @returns {PersonalMessage|undefined} - The PersonalMessage with the id that matches the passed msgId, or undefined
+   * @returns {PersonalMessage|undefined} The PersonalMessage with the id that matches the passed msgId, or undefined
    * if no PersonalMessage has that id.
    *
    */
@@ -184,7 +183,7 @@ export default class PersonalMessageManager extends EventEmitter {
    *
    * @param {Object} msgParams - The msgParams to be used when eth_sign is called, plus data added by MetaMask.
    * @param {Object} msgParams.metamaskId Added to msgParams for tracking and identification within MetaMask.
-   * @returns {Promise<object>} - Promises the msgParams object with metamaskId removed.
+   * @returns {Promise<object>} Promises the msgParams object with metamaskId removed.
    *
    */
   approveMessage(msgParams) {
@@ -221,7 +220,7 @@ export default class PersonalMessageManager extends EventEmitter {
    * Removes the metamaskId property from passed msgParams and returns a promise which resolves the updated msgParams
    *
    * @param {Object} msgParams - The msgParams to modify
-   * @returns {Promise<object>} - Promises the msgParams with the metamaskId property removed
+   * @returns {Promise<object>} Promises the msgParams with the metamaskId property removed
    *
    */
   prepMsgForSigning(msgParams) {
@@ -306,7 +305,7 @@ export default class PersonalMessageManager extends EventEmitter {
    * A helper function that converts raw buffer data to a hex, or just returns the data if it is already formatted as a hex.
    *
    * @param {any} data - The buffer data to convert to a hex
-   * @returns {string} - A hex string conversion of the buffer data
+   * @returns {string} A hex string conversion of the buffer data
    *
    */
   normalizeMsgData(data) {

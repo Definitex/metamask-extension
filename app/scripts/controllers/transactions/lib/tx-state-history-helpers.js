@@ -3,7 +3,7 @@ import { cloneDeep } from 'lodash'
 
 /**
   converts non-initial history entries into diffs
-  @param {array} longHistory
+  @param {Array} longHistory
   @returns {array}
 */
 export function migrateFromSnapshotsToDiffs(longHistory) {
