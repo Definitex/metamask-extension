@@ -8,6 +8,7 @@ import EthQuery from 'eth-query'
 import proxyquire from 'proxyquire'
 import firstTimeState from '../../localhostState'
 import createTxMeta from '../../../lib/createTxMeta'
+import { TRANSACTION_STATUSES } from '../../../../shared/constants/transaction'
 
 const threeBoxSpies = {
   init: sinon.stub(),
@@ -707,20 +708,24 @@ describe('MetaMaskController', function () {
       metamaskController.txController.txStateManager._saveTxList([
         createTxMeta({
           id: 1,
-          status: 'unapproved',
+          status: TRANSACTION_STATUSES.UNAPPROVED,
           metamaskNetworkId: currentNetworkId,
           txParams: { from: '0x0dcd5d886577d5081b0c52e242ef29e70be3e7bc' },
         }),
         createTxMeta({
           id: 1,
-          status: 'unapproved',
+          status: TRANSACTION_STATUSES.UNAPPROVED,
           metamaskNetworkId: currentNetworkId,
           txParams: { from: '0x0dcd5d886577d5081b0c52e242ef29e70be3e7bc' },
         }),
-        createTxMeta({ id: 2, status: 'rejected', metamaskNetworkId: '32' }),
+        createTxMeta({
+          id: 2,
+          status: TRANSACTION_STATUSES.REJECTED,
+          metamaskNetworkId: '32',
+        }),
         createTxMeta({
           id: 3,
-          status: 'submitted',
+          status: TRANSACTION_STATUSES.SUBMITTED,
           metamaskNetworkId: currentNetworkId,
           txParams: { from: '0xB09d8505E1F4EF1CeA089D47094f5DD3464083d4' },
         }),
@@ -846,7 +851,7 @@ describe('MetaMaskController', function () {
     })
 
     it('sets the status to unapproved', function () {
-      assert.equal(metamaskMsgs[msgId].status, 'unapproved')
+      assert.equal(metamaskMsgs[msgId].status, TRANSACTION_STATUSES.UNAPPROVED)
     })
 
     it('sets the type to eth_sign', function () {
@@ -856,7 +861,7 @@ describe('MetaMaskController', function () {
     it('rejects the message', function () {
       const msgIdInt = parseInt(msgId, 10)
       metamaskController.cancelMessage(msgIdInt, noop)
-      assert.equal(messages[0].status, 'rejected')
+      assert.equal(messages[0].status, TRANSACTION_STATUSES.REJECTED)
     })
 
     it('errors when signing a message', async function () {
@@ -923,7 +928,10 @@ describe('MetaMaskController', function () {
     })
 
     it('sets the status to unapproved', function () {
-      assert.equal(metamaskPersonalMsgs[msgId].status, 'unapproved')
+      assert.equal(
+        metamaskPersonalMsgs[msgId].status,
+        TRANSACTION_STATUSES.UNAPPROVED,
+      )
     })
 
     it('sets the type to personal_sign', function () {
@@ -933,14 +941,17 @@ describe('MetaMaskController', function () {
     it('rejects the message', function () {
       const msgIdInt = parseInt(msgId, 10)
       metamaskController.cancelPersonalMessage(msgIdInt, noop)
-      assert.equal(personalMessages[0].status, 'rejected')
+      assert.equal(personalMessages[0].status, TRANSACTION_STATUSES.REJECTED)
     })
 
     it('errors when signing a message', async function () {
       await metamaskController.signPersonalMessage(
         personalMessages[0].msgParams,
       )
-      assert.equal(metamaskPersonalMsgs[msgId].status, 'signed')
+      assert.equal(
+        metamaskPersonalMsgs[msgId].status,
+        TRANSACTION_STATUSES.SIGNED,
+      )
       assert.equal(
         metamaskPersonalMsgs[msgId].rawSig,
         '0x6a1b65e2b8ed53cf398a769fad24738f9fbe29841fe6854e226953542c4b6a173473cb152b6b1ae5f06d601d45dd699a129b0a8ca84e78b423031db5baa734741b',

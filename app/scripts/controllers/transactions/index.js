@@ -178,9 +178,9 @@ export default class TransactionController extends EventEmitter {
         `${initialTxMeta.id}:finished`,
         (finishedTxMeta) => {
           switch (finishedTxMeta.status) {
-            case 'submitted':
+            case TRANSACTION_STATUSES.SUBMITTED:
               return resolve(finishedTxMeta.hash)
-            case 'rejected':
+            case TRANSACTION_STATUSES.REJECTED:
               return reject(
                 cleanErrorStack(
                   ethErrors.provider.userRejectedRequest(
@@ -188,7 +188,7 @@ export default class TransactionController extends EventEmitter {
                   ),
                 ),
               )
-            case 'failed':
+            case TRANSACTION_STATUSES.FAILED:
               return reject(
                 cleanErrorStack(
                   ethErrors.rpc.internal(finishedTxMeta.err.message),
@@ -719,7 +719,7 @@ export default class TransactionController extends EventEmitter {
   _onBootCleanUp() {
     this.txStateManager
       .getFilteredTxList({
-        status: 'unapproved',
+        status: TRANSACTION_STATUSES.UNAPPROVED,
         loadingDefaults: true,
       })
       .forEach((tx) => {

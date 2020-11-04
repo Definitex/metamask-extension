@@ -67,6 +67,7 @@ import { useNewMetricEvent } from '../../hooks/useMetricEvent'
 import { getValueFromWeiHex } from '../../helpers/utils/conversions.util'
 
 import FeatureToggledRoute from '../../helpers/higher-order-components/feature-toggled-route'
+import { TRANSACTION_STATUSES } from '../../../../shared/constants/transaction'
 import {
   fetchTokens,
   fetchTopAssets,
@@ -146,12 +147,13 @@ export default function Swap() {
       destinationTokenInfo?.decimals,
       approveTxData,
     )
-  const tradeConfirmed = tradeTxData?.status === 'confirmed'
+  const tradeConfirmed = tradeTxData?.status === TRANSACTION_STATUSES.CONFIRMED
   const approveError =
-    approveTxData?.status === 'failed' ||
+    approveTxData?.status === TRANSACTION_STATUSES.FAILED ||
     approveTxData?.txReceipt?.status === '0x0'
   const tradeError =
-    tradeTxData?.status === 'failed' || tradeTxData?.txReceipt?.status === '0x0'
+    tradeTxData?.status === TRANSACTION_STATUSES.FAILED ||
+    tradeTxData?.txReceipt?.status === '0x0'
   const conversionError = approveError || tradeError
 
   if (conversionError) {
